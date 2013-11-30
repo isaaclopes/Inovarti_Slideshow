@@ -28,7 +28,7 @@ CREATE TABLE `{$this->getTable('slideshow/slides')}` (
   PRIMARY KEY (`slide_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (1, 'left', 'Lorem Ipsum<br/> Dolor sit Amen', '\'consectetur adipiscing elit. Donec viverra enim', '+Mais', '//mundopet.com', 'slideshow/slide1.jpg', 1, 10, NOW(), NOW() );
+INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (1, 'left', 'Lorem Ipsum<br/> Dolor sit Amen', '\'consectetur adipiscing elit. Donec viverra enim', '+Mais', '//www.google.com.br', 'slideshow/slide1.jpg', 1, 10, NOW(), NOW() );
 INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (2, 'center', 'Lorem Ipsum Dolor sit Amen', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra enim sed nibh aliquam nec feugiat orci ultricies. Pellentesque dictum, metus ac faucibus ornare, mauris sem condimentum tortor, vel vestibulum nisi felis ut tortor. Mauris venenatis fermentum turpis', 'aqui', '//novo.newsleo.com.br/', '', 1, 20, NOW(), NOW() );
 INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (3, 'left', '', '', '', '', 'slideshow/slide3.jpg', 1, 30, NOW(), NOW() );
 

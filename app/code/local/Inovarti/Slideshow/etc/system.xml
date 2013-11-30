@@ -8,16 +8,10 @@
  */
 -->
 <config>
-    <tabs>
-        <inovarti translate="label" module="slideshow">
-            <label>Inovarti</label>
-            <sort_order>299</sort_order>
-        </inovarti>
-    </tabs>
     <sections>
         <slideshow translate="label" module="slideshow">
             <label>Slideshow</label>
-            <tab>mundopet</tab>
+            <tab>inovarti</tab>
             <sort_order>140</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>

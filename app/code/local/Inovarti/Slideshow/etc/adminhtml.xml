@@ -46,27 +46,6 @@
                             </config>
                         </children>
                     </system>
-                    <!--inovarti>
-                        <title>Mundopet</title>
-                        <children>
-                            <petnanet>
-                                <title>Petnanet</title>
-                                <children>
-                                    <slideshow>
-                                        <title>Slideshow</title>
-                                        <children>
-                                            <items>
-                                                <title>Manage Slides</title>
-                                            </items>
-                                            <configuration>
-                                                <title>Configuration</title>
-                                            </configuration>
-                                        </children>
-                                    </slideshow>
-                                </children>
-                            </petnanet>
-                        </children>
-                    </inovarti-->
                 </children>
             </admin>
         </resources>
