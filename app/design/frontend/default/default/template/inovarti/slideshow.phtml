@@ -6,80 +6,58 @@
  * @author     Suporte <suporte@inovarti.com.br>
  */
 $config = Mage::getStoreConfig('slideshow/config');
-$route = Mage::app()->getFrontController()->getRequest()->getRouteName();
 $action = Mage::app()->getFrontController()->getRequest()->getActionName();
+$control_nav = ( in_array($config['control_nav'], array('true', 'false')) ? $config['control_nav'] : 'true' );
+$direction_nav = ( in_array($config['direction_nav'], array('true', 'false')) ? $config['direction_nav'] : 'true' );
+
 if ($config['enabled']) {
     $show = true;
     if ($show) {
         ?>
-        <!-- SLIDESHOW -->
-        <div class="slider">
-            <div id="slide-timeline"></div>
-            <div id="flexslider" class="flexslider">
-                <ul class="slides">
-                    <?php
-                    $slides = $this->getSlides();
-                    foreach ($slides as $s) {
-                        $style = $content = '';
-                        $attr = 'data-img-height="0"';
-                        if (!empty($s['image'])) {
-                            $imgSize = getimagesize(Mage::getBaseDir('media') . '/' . $s['image']);
-                            if ($imgSize) {
-                                $style = "background:url('" . Mage::getBaseUrl('media') . $s['image'] . "') 50% 0 no-repeat;";
-                                $attr = 'data-img-height="' . $imgSize[1] . '"';
-                            }
+        <div id="HomeCarousel" class="carousel slide">  
+            <!-- Carousel items -->  
+            <div class="carousel-inner">  
+                <?php
+                $slides = $this->getSlides();
+                foreach ($slides as $s) {
+                    $style = $content = '';
+                    $attr = 'data-img-height="0"';
+                    if (!empty($s['image'])) {
+                        $imgSize = getimagesize(Mage::getBaseDir('media') . '/' . $s['image']);
+                        if ($imgSize) {
+                            $style = "background:url('" . Mage::getBaseUrl('media') . $s['image'] . "') 50% 0 no-repeat;";
+                            $attr = 'data-img-height="' . $imgSize[1] . '"';
                         }
-                        if (!empty($s['slide_width'])) {
-                            $content = 'style="width:' . $s['slide_width'] . 'px;"';
-                        }
-                        ?>
-                        <li style="<?php echo $style; ?>" <?php echo $attr; ?> >
-                            <?php if (!empty($s['small_image'])) : ?>
-                                <img class="small_image" src="<?php echo Mage::getBaseUrl('media') . $s['small_image'] ?>" alt="" />
-                            <?php endif; ?>
-                            <div class="row text-<?php echo $s['slide_align']; ?>">
-                                <div class="content" <?php echo $content; ?>>
-                                    <?php if (!empty($s['slide_title'])) : ?>
-                                        <strong><?php echo $s['slide_title']; ?></strong>
-                                    <?php endif; ?>
-                                    <?php if (!empty($s['slide_text']) || !empty($s['slide_button'])) : ?>
-                                        <div class="border"></div>
-                                    <?php endif; ?>
-                                    <?php if (!empty($s['slide_text'])) : ?>
-                                        <p><?php echo nl2br($s['slide_text']); ?></p>
-                                    <?php endif; ?>
-                                    <?php if (!empty($s['slide_button'])) : ?>
-                                        <button class="button button_white" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?>><span><span><?php echo $s['slide_button']; ?></span></span></button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </li>
-                        <?php } // foreach($slides as $s) { 
+                    }
+                    if (!empty($s['slide_width'])) {
+                        $content = 'style="width:' . $s['slide_width'] . 'px;"';
+                    }
                     ?>
-                </ul>
-            </div>
-        </div>
+                    <div class="item">
+                        <?php if (!empty($s['image'])) : ?>
+                            <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>"><img class="small_image main-image" src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" <?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>/></a>
+                        <?php endif; ?>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>  
+            <!-- Carousel nav -->  
+            <?php if ($direction_nav): ?>
+                <a class="carousel-control left" href="#HomeCarousel" data-slide="prev">‹</a>  
+                <a class="carousel-control right" href="#HomeCarousel" data-slide="next">›</a>  
+            <?php endif; ?>
+        </div>  
         <script>
-            var CONFIG_SLIDESHOW = {
-                animation: "<?php echo ( in_array($config['animation'], array('slide', 'fade')) ? $config['animation'] : 'slide' ); ?>",
-                slideshow: <?php echo ( in_array($config['slideshow'], array('true', 'false')) ? $config['slideshow'] : 'true' ); ?>,
-                useCSS: false,
-                touch: true,
-                video: false,
-                animationLoop: <?php echo ( in_array($config['animation_loop'], array('true', 'false')) ? $config['animation_loop'] : 'true' ); ?>,
-                mousewheel: <?php echo ( in_array($config['mousewheel'], array('true', 'false')) ? $config['mousewheel'] : 'false' ); ?>,
-                smoothHeight: <?php echo ( in_array($config['smoothheight'], array('true', 'false')) ? $config['smoothheight'] : 'false' ); ?>,
-                slideshowSpeed: <?php echo ( is_numeric($config['slideshow_speed']) ? $config['slideshow_speed'] : 7000 ); ?>,
-                animationSpeed: <?php echo ( is_numeric($config['animation_speed']) ? $config['animation_speed'] : 600 ); ?>,
-                pauseOnAction: true,
-                pauseOnHover: true,
-                controlNav: <?php echo ( in_array($config['control_nav'], array('true', 'false')) ? $config['control_nav'] : 'true' ); ?>,
-                directionNav: <?php echo ( in_array($config['direction_nav'], array('true', 'false')) ? $config['direction_nav'] : 'true' ); ?>,
-                timeline: <?php echo ( in_array($config['timeline'], array('true', 'false')) ? $config['timeline'] : 'true' ); ?>,
-                height: "<?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>"
-            }
+                            
+            jQuery('#HomeCarousel').carousel({
+                interval: 2000,
+                wrap: <?php echo ( in_array($config['wrap'], array('true', 'false')) ? $config['wrap'] : 'false' ); ?>
+            });
+                            
+                            
         </script>
-        <!-- SLIDESHOW EOF -->
-    <?php } //if ( $show ) {  ?>
-<?php
-} //if ( $config['enabled'] ) { ?>
+    <?php
+    }
+}
+?>

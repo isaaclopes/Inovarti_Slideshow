@@ -34,18 +34,30 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
 
         $fieldset->addField('slide_title', 'text', array(
             'label' => Mage::helper('slideshow')->__('Title'),
-            'class'     => 'required-entry',
+            'class' => 'required-entry',
             'required' => true,
             'name' => 'slide_title',
         ));
 
         $fieldset->addField('slide_link', 'text', array(
             'label' => Mage::helper('slideshow')->__('Link'),
-            'class'     => 'validate-url',
+            'class' => 'validate-url',
             'required' => true,
             'name' => 'slide_link',
         ));
 
+        $fieldset->addField('from_date', 'date', array(
+            'label' => Mage::helper('slideshow')->__('Date From'),
+            'name' => 'from_date',
+            'image' => $this->getSkinUrl('images/grid-cal.gif'),
+            'format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
+        ));
+        $fieldset->addField('to_date', 'date', array(
+            'label' => Mage::helper('slideshow')->__('Date To'),
+            'name' => 'to_date',
+            'image' => $this->getSkinUrl('images/grid-cal.gif'),
+            'format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
+        ));
 
         $data = array();
         $out = '';
