@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Slideshow
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+-->
+<config>
+    <menu>
+        <catalog translate="title" module="catalog">
+            <children>
+                <slideshow translate="title" module="slideshow">
+                    <title>Slideshow</title>
+                    <sort_order>50</sort_order>
+                    <children>
+                        <items translate="title" module="slideshow">
+                            <title>Manage Slides</title>
+                            <sort_order>0</sort_order>
+                            <action>slideshow/adminhtml_slideshow</action>
+                        </items>
+                        <configuration>
+                            <title>Configuration</title>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/system_config/edit/section/slideshow</action>
+                        </configuration>
+                    </children>
+                </slideshow>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <slideshow translate="title" module="slideshow">
+                                        <title>Slideshow</title>
+                                        <sort_order>300</sort_order>
+                                    </slideshow>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <!--inovarti>
+                        <title>Mundopet</title>
+                        <children>
+                            <petnanet>
+                                <title>Petnanet</title>
+                                <children>
+                                    <slideshow>
+                                        <title>Slideshow</title>
+                                        <children>
+                                            <items>
+                                                <title>Manage Slides</title>
+                                            </items>
+                                            <configuration>
+                                                <title>Configuration</title>
+                                            </configuration>
+                                        </children>
+                                    </slideshow>
+                                </children>
+                            </petnanet>
+                        </children>
+                    </inovarti-->
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

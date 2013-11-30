@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Slideshow
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+-->
+<layout version="0.1.0">
+    <cms_index_index translate="label">
+        <reference name="header">
+            <block type="slideshow/slideshow" name="slideshow" as="slideshow" template="inovarti/slideshow.phtml"/>
+        </reference>
+    </cms_index_index>
+</layout>
