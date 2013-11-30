@@ -28,7 +28,12 @@ INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_title`, 
 INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_title`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (3, 'Lorem Ipsum Dolor sit Amen', 'http://www.google.com.br', 'slideshow/slide3.jpg', 1, 30, NOW(), NOW() );
 
 ");
-
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Slideshow
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
 /**
  * Drop 'slides_store' table
  */
