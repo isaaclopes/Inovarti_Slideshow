@@ -9,8 +9,8 @@
 -->
 <layout version="0.1.0">
     <cms_index_index translate="label">
-        <reference name="header">
-            <block type="slideshow/slideshow" name="slideshow" as="slideshow" template="inovarti/slideshow.phtml"/>
+        <reference name="content">
+            <block type="slideshow/slideshow" name="slideshow" as="slideshow" before="-" template="inovarti/slideshow.phtml"/>
         </reference>
     </cms_index_index>
 </layout>
