@@ -42,7 +42,11 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtml_B
                 => array($this, '_filterStoreCondition'),
             ));
         }
-
+        $this->addColumn('slide_title', array(
+            'header' => Mage::helper('slideshow')->__('Title'),
+            'align' => 'left',
+            'index' => 'slide_title',
+        ));
         $this->addColumn('slide_link', array(
             'header' => Mage::helper('slideshow')->__('Link'),
             'align' => 'left',

@@ -8,18 +8,12 @@
  */
 class Inovarti_Slideshow_Model_Config_Yesno {
 
-    public function toOptionArray() {
-        $options = array();
-        $options[] = array(
-            'value' => 'true',
-            'label' => 'Yes',
+    
+    public function toOptionArray()
+    {
+        return array(
+            array('value' => 'true', 'label'=>Mage::helper('slideshow')->__('Yes')),
+            array('value' => 'false', 'label'=>Mage::helper('slideshow')->__('No')),
         );
-        $options[] = array(
-            'value' => 'false',
-            'label' => 'No',
-        );
-
-        return $options;
     }
-
 }

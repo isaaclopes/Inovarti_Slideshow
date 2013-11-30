@@ -27,20 +27,11 @@
     <frontend>
         <layout>
             <updates>
-                <odetail>
+                <slideshow>
                     <file>inovarti/slideshow.xml</file>
-                </odetail>
+                </slideshow>
             </updates>
         </layout>
-        <translate>
-            <modules>
-                <Inovarti_Odetail>
-                    <files>
-                        <default>Inovarti_Slideshow</default>
-                    </files>
-                </Inovarti_Odetail>
-            </modules>
-        </translate>
     </frontend>
     <global>
         <models>
@@ -91,21 +82,68 @@
             </slideshow>
         </helpers>
     </global>
+    <adminhtml>
+        <menu>
+            <catalog translate="title" module="catalog">
+                <children>
+                    <slideshow translate="title" module="slideshow">
+                        <title>Slideshow</title>
+                        <sort_order>50</sort_order>
+                        <children>
+                            <items translate="title" module="slideshow">
+                                <title>Manage Slides</title>
+                                <sort_order>0</sort_order>
+                                <action>slideshow/adminhtml_slideshow</action>
+                            </items>
+                            <configuration translate="title">
+                                <title>Configuration</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/system_config/edit/section/slideshow</action>
+                            </configuration>
+                        </children>
+                    </slideshow>
+                </children>
+            </catalog>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <slideshow translate="title" module="slideshow">
+                                            <title>Slideshow</title>
+                                            <sort_order>300</sort_order>
+                                        </slideshow>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Inovarti_Slideshow>
+                    <files>
+                        <default>Inovarti_Slideshow.csv</default>
+                    </files>
+                </Inovarti_Slideshow>
+            </modules>
+        </translate>
+    </adminhtml>
     <default>
         <slideshow>
             <config>
                 <enabled>1</enabled>
                 <height></height>
-                <animation>slide</animation>
-                <slideshow>true</slideshow>
-                <animation_loop>true</animation_loop>
-                <mousewheel>false</mousewheel>
-                <smoothheight>false</smoothheight>
-                <slideshow_speed>7000</slideshow_speed>
-                <animation_speed>400</animation_speed>
-                <control_nav>false</control_nav>
+                <wrap>true</wrap>
+                <interval>7000</interval>
+                <control_nav>true</control_nav>
                 <direction_nav>true</direction_nav>
-                <timeline>true</timeline>
             </config>
         </slideshow>
     </default>

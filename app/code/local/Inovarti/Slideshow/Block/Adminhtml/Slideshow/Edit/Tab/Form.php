@@ -32,49 +32,17 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
           ));
           } */
 
-        $fieldset->addField('slide_align', 'select', array(
-            'label' => Mage::helper('slideshow')->__('Text Align'),
-            'name' => 'slide_align',
-            'values' => array(
-                array(
-                    'value' => 'left',
-                    'label' => Mage::helper('slideshow')->__('Left'),
-                ),
-                array(
-                    'value' => 'right',
-                    'label' => Mage::helper('slideshow')->__('Right'),
-                ),
-                array(
-                    'value' => 'center',
-                    'label' => Mage::helper('slideshow')->__('Center'),
-                ),
-            ),
-        ));
-
         $fieldset->addField('slide_title', 'text', array(
             'label' => Mage::helper('slideshow')->__('Title'),
-            'required' => false,
+            'class'     => 'required-entry',
+            'required' => true,
             'name' => 'slide_title',
-        ));
-        $fieldset->addField('slide_text', 'textarea', array(
-            'label' => Mage::helper('slideshow')->__('Text'),
-            'required' => false,
-            'name' => 'slide_text',
-        ));
-        $fieldset->addField('slide_button', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Button Text'),
-            'required' => false,
-            'name' => 'slide_button',
-        ));
-        $fieldset->addField('slide_width', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Content width'),
-            'required' => false,
-            'name' => 'slide_width',
         ));
 
         $fieldset->addField('slide_link', 'text', array(
             'label' => Mage::helper('slideshow')->__('Link'),
-            'required' => false,
+            'class'     => 'validate-url',
+            'required' => true,
             'name' => 'slide_link',
         ));
 
@@ -95,25 +63,10 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
         }
 
         $fieldset->addField('image', 'file', array(
-            'label' => Mage::helper('slideshow')->__('Image for PC'),
+            'label' => Mage::helper('slideshow')->__('Image'),
             'required' => false,
             'name' => 'image',
-            'note' => 'Image used for PC screens (larger than 768) ' . $out,
-        ));
-
-        $out = '';
-        if (!empty($data['small_image'])) {
-            $url = Mage::getBaseUrl('media') . $data['small_image'];
-            $out = '<br/><center><a href="' . $url . '" target="_blank" id="imageurl">';
-            $out .= "<img src=" . $url . " width='150px' />";
-            $out .= '</a></center>';
-        }
-
-        $fieldset->addField('small_image', 'file', array(
-            'label' => Mage::helper('slideshow')->__('Small Image for iPhone'),
-            'required' => false,
-            'name' => 'small_image',
-            'note' => 'Small image used for small screens (less than 768) ' . $out,
+            'note' => 'Images Slider' . $out,
         ));
 
         $fieldset->addField('status', 'select', array(

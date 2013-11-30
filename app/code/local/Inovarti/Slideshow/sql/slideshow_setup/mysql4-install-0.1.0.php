@@ -13,14 +13,9 @@ $installer->run("
 DROP TABLE IF EXISTS `{$this->getTable('slideshow/slides')}`;
 CREATE TABLE `{$this->getTable('slideshow/slides')}` (
   `slide_id` int(11) unsigned NOT NULL auto_increment,
-  `slide_align` ENUM('left', 'right', 'center'),
   `slide_title` text NOT NULL default '',
-  `slide_text` text NOT NULL default '',
-  `slide_button` text NOT NULL default '',
-  `slide_width` varchar(8) NOT NULL default '',
   `slide_link` varchar(255) NOT NULL default '',
   `image` varchar(255) NOT NULL default '',
-  `small_image` varchar(255) NOT NULL default '',
   `status` smallint(6) NOT NULL default '0',
   `sort_order` smallint(6) NOT NULL default '0',
   `created_time` datetime NULL,
@@ -28,9 +23,9 @@ CREATE TABLE `{$this->getTable('slideshow/slides')}` (
   PRIMARY KEY (`slide_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (1, 'left', 'Lorem Ipsum<br/> Dolor sit Amen', '\'consectetur adipiscing elit. Donec viverra enim', '+Mais', '//www.google.com.br', 'slideshow/slide1.jpg', 1, 10, NOW(), NOW() );
-INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (2, 'center', 'Lorem Ipsum Dolor sit Amen', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra enim sed nibh aliquam nec feugiat orci ultricies. Pellentesque dictum, metus ac faucibus ornare, mauris sem condimentum tortor, vel vestibulum nisi felis ut tortor. Mauris venenatis fermentum turpis', 'aqui', '//novo.newsleo.com.br/', '', 1, 20, NOW(), NOW() );
-INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_align`, `slide_title`, `slide_text`, `slide_button`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (3, 'left', '', '', '', '', 'slideshow/slide3.jpg', 1, 30, NOW(), NOW() );
+INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_title`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (1, 'Lorem Ipsum<br/> Dolor sit Amen', 'http://www.google.com.br', 'slideshow/slide1.jpg', 1, 10, NOW(), NOW() );
+INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_title`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (2, 'Lorem Ipsum Dolor sit Amen', 'http://www.google.com.br', 'slideshow/slide2.jpg', 1, 20, NOW(), NOW() );
+INSERT INTO `{$this->getTable('slideshow/slides')}` (`slide_id`, `slide_title`, `slide_link`, `image`, `status`, `sort_order`, `created_time`, `update_time`) VALUES (3, 'Lorem Ipsum Dolor sit Amen', 'http://www.google.com.br', 'slideshow/slide3.jpg', 1, 30, NOW(), NOW() );
 
 ");
 
