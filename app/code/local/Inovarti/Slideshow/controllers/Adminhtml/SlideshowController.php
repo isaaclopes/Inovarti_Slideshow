@@ -89,27 +89,14 @@ class Inovarti_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml_Co
 
                 $data['image'] = 'slideshow/' . $result['file'];
             }
-
-            if (isset($_FILES['small_image']['name']) && $_FILES['small_image']['name'] != null) {
-                $result['file'] = '';
-                try {
-                    /* Starting upload */
-                    $uploader = new Varien_File_Uploader('small_image');
-                    $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
-                    $uploader->setAllowRenameFiles(true);
-                    $uploader->setFilesDispersion(false);
-                    $path = Mage::getBaseDir('media') . DS . 'slideshow' . DS;
-                    $result = $uploader->save($path, $_FILES['small_image']['name']);
-                } catch (Exception $e) {
-                    Mage::getSingleton('adminhtml/session')->addError($e->getMessage() . '  ' . $path);
-                    Mage::getSingleton('adminhtml/session')->setFormData($data);
-                    $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
-                    return;
-                }
-
-                $data['small_image'] = 'slideshow/' . $result['file'];
+            if ($data['from_date'] != NULL) {
+                $date = DateTime::createFromFormat('d/m/Y', $data['from_date']);
+                $data['from_date'] = $date->format('Y-m-d');
             }
-
+            if ($data['to_date'] != NULL) {
+                $date = DateTime::createFromFormat('d/m/Y', $data['to_date']);
+                $data['to_date'] = $date->format('Y-m-d');
+            }
 
             $model = Mage::getModel('slideshow/slideshow');
             $model->setData($data)
