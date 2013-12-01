@@ -60,7 +60,22 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Grid extends Mage_Adminhtml_B
             'index' => 'image',
             'renderer' => 'slideshow/adminhtml_slideshow_grid_renderer_image'
         ));
+        $this->addColumn('from_date', array(
+            'header'    => Mage::helper('slideshow')->__('Date Start'),
+            'align'     => 'left',
+            'width'     => '120px',
+            'type'      => 'date',
+            'index'     => 'from_date',
+        ));
 
+        $this->addColumn('to_date', array(
+            'header'    => Mage::helper('slideshow')->__('Date Expire'),
+            'align'     => 'left',
+            'width'     => '120px',
+            'type'      => 'date',
+            'default'   => '--',
+            'index'     => 'to_date',
+        ));
         $this->addColumn('status', array(
             'header' => Mage::helper('slideshow')->__('Status'),
             'align' => 'left',

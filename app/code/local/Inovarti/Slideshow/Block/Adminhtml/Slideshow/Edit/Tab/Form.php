@@ -47,14 +47,14 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
         ));
 
         $fieldset->addField('from_date', 'date', array(
-            'label' => Mage::helper('slideshow')->__('Date From'),
+            'label' => Mage::helper('slideshow')->__('Date Start'),
             'name' => 'from_date',
             'image' => $this->getSkinUrl('images/grid-cal.gif'),
             'format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
             'input_format' => Varien_Date::DATE_INTERNAL_FORMAT
         ));
         $fieldset->addField('to_date', 'date', array(
-            'label' => Mage::helper('slideshow')->__('Date To'),
+            'label' => Mage::helper('slideshow')->__('Date Expire'),
             'name' => 'to_date',
             'image' => $this->getSkinUrl('images/grid-cal.gif'),
             'format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
