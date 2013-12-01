@@ -26,5 +26,12 @@ $installer->getConnection()
             'nullable' => true,
             'default' => null)
 );
+$installer->getConnection()
+        ->addColumn($slidesTable, 'position', array(
+            'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'    => 32,
+            'nullable' => true,
+            'default' => null)
+);
 $installer->endSetup();
 
