@@ -1,0 +1,42 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Slideshow
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+$config = Mage::getStoreConfig('slideshow/config');
+$action = Mage::app()->getFrontController()->getRequest()->getActionName();
+if ($config['enabled']) {
+    $show = true;
+    if ($show) {
+        $slides = $this->getSlidesmini();
+        ?>
+
+
+        <div class="container">
+            <div class='row'>
+                <div class="col-md-12">
+                    <?php
+                    foreach ($slides as $s) {
+                        ?>
+                        <?php if (!empty($s['image'])) : ?>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="thumbnail">
+                                    <img src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : '176' ); ?>">
+                                    <div class="caption">
+                                        <h3><a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>"><?php echo $s['slide_title']; ?></a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>

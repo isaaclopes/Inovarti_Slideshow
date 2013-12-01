@@ -11,6 +11,7 @@
     <cms_index_index translate="label">
         <reference name="content">
             <block type="slideshow/slideshow" name="slideshow" as="slideshow" before="-" template="inovarti/slideshow.phtml"/>
+            <block type="slideshow/slideshow" name="slideshow.mini" after="slideshow" template="inovarti/slideshowmini.phtml"/>
         </reference>
     </cms_index_index>
 </layout>
