@@ -47,7 +47,7 @@
                         <wrap>
                             <label>Pause</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>slideshow/config_yesno</source_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment>Whether the carousel should cycle continuously or have hard stops</comment>
                             <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
@@ -66,7 +66,7 @@
                         <control_nav>
                             <label>Show navigation</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>slideshow/config_yesno</source_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment>Show navigation for paging control of each slide?</comment>
                             <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
@@ -76,7 +76,7 @@
                         <direction_nav>
                             <label>Show previous/next navigation</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>slideshow/config_yesno</source_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>100</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_store>1</show_in_store>
