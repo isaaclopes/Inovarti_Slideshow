@@ -25,7 +25,7 @@ if ($config['enabled']) {
                                 <div class="thumbnail">
                                     <img src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : '176' ); ?>">
                                     <div class="caption">
-                                        <h3><a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>"><?php echo $s['slide_title']; ?></a></h3>
+                                        <h4><a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>"><?php echo $s['slide_title']; ?></a></h4>
                                     </div>
                                 </div>
                             </div>
