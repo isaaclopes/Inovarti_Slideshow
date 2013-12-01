@@ -7,18 +7,28 @@
  */
 $config = Mage::getStoreConfig('slideshow/config');
 $action = Mage::app()->getFrontController()->getRequest()->getActionName();
-$control_nav = ( in_array($config['control_nav'], array('true', 'false')) ? $config['control_nav'] : 'true' );
-$direction_nav = ( in_array($config['direction_nav'], array('true', 'false')) ? $config['direction_nav'] : 'true' );
-
 if ($config['enabled']) {
     $show = true;
     if ($show) {
+        $slides = $this->getSlides();
         ?>
         <div id="HomeCarousel" class="carousel slide">  
-            <!-- Carousel items -->  
+            <?php if ($config['control_nav']) : ?>
+                <ol class="carousel-indicators">
+                    <?php
+                    $i = 0;
+                    foreach ($slides as $s) {
+                        ?>
+                        <li data-target="#HomeCarousel" data-slide-to="<?php echo $i ?>" <?php if ($i == 0) echo 'class="active"'; ?>></li>
+                        <?php
+                        $i++;
+                    }
+                    ?>
+                </ol>
+            <?php endif;
+            ?>
             <div class="carousel-inner">  
                 <?php
-                $slides = $this->getSlides();
                 foreach ($slides as $s) {
                     $style = $content = '';
                     $attr = 'data-img-height="0"';
@@ -33,7 +43,7 @@ if ($config['enabled']) {
                         $content = 'style="width:' . $s['slide_width'] . 'px;"';
                     }
                     ?>
-                    <?php if (!empty($s['image'])) : ?>
+            <?php if (!empty($s['image'])) : ?>
                         <div class="item">
                             <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>">
                                 <img class="small_image main-image" src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" <?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>/>
@@ -45,20 +55,17 @@ if ($config['enabled']) {
                 ?>
             </div>  
             <!-- Carousel nav -->  
-            <?php if ($direction_nav): ?>
+        <?php if ($config['direction_nav']): ?>
                 <a class="carousel-control left" href="#HomeCarousel" data-slide="prev">‹</a>  
                 <a class="carousel-control right" href="#HomeCarousel" data-slide="next">›</a>  
-            <?php endif; ?>
+        <?php endif; ?>
         </div>  
         <script>
-                                    
             jQuery('#HomeCarousel').carousel({
                 interval: <?php echo $config['interval']; ?>,
                 wrap: <?php echo ( in_array($config['wrap'], array('true', 'false')) ? $config['wrap'] : 'false' ); ?>
             });
             jQuery('.carousel-inner > div.item').eq(0).addClass('active');
-                                    
-                                    
         </script>
         <?php
     }
