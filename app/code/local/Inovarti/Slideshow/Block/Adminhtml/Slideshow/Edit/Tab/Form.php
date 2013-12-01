@@ -45,7 +45,22 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
             'required' => true,
             'name' => 'slide_link',
         ));
-
+        
+        $fieldset->addField('positon', 'select', array(
+            'label' => Mage::helper('slideshow')->__('Position'),
+            'name' => 'positon',
+            'values' => array(
+                array(
+                    'value' => 'header',
+                    'label' => Mage::helper('slideshow')->__('Header'),
+                ),
+                array(
+                    'value' => 'mini',
+                    'label' => Mage::helper('slideshow')->__('Mini Header'),
+                ),
+            ),
+        ));
+        
         $fieldset->addField('from_date', 'date', array(
             'label' => Mage::helper('slideshow')->__('Date Start'),
             'name' => 'from_date',
