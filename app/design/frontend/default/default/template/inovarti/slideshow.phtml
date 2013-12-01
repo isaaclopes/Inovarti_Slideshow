@@ -34,11 +34,11 @@ if ($config['enabled']) {
                     }
                     ?>
                     <?php if (!empty($s['image'])) : ?>
-                    <div class="item">
-                        <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>">
-                            <img class="small_image main-image" src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" <?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>/>
-                        </a>
-                    </div>
+                        <div class="item">
+                            <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>">
+                                <img class="small_image main-image" src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" <?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>/>
+                            </a>
+                        </div>
                     <?php endif; ?>
                     <?php
                 }
@@ -51,16 +51,16 @@ if ($config['enabled']) {
             <?php endif; ?>
         </div>  
         <script>
-                            
+                                    
             jQuery('#HomeCarousel').carousel({
-                interval: 2000,
+                interval: <?php echo $config['interval']; ?>,
                 wrap: <?php echo ( in_array($config['wrap'], array('true', 'false')) ? $config['wrap'] : 'false' ); ?>
             });
             jQuery('.carousel-inner > div.item').eq(0).addClass('active');
-                            
-                            
+                                    
+                                    
         </script>
-    <?php
+        <?php
     }
 }
 ?>
