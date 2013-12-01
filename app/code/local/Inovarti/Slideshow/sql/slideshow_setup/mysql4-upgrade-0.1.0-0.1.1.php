@@ -28,11 +28,11 @@ $installer->getConnection()
 );
 $installer->getConnection()
         ->addColumn($slidesTable, 'position', array(
-            'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'type' => Varien_Db_Ddl_Table::TYPE_NUMERIC,
             'comment' => 'Positon',
-            'length'    => 32,
-            'nullable' => true,
-            'default' => null)
+            'length'    => 1,
+            'nullable' => false,
+            'default' => 0)
 );
 $installer->endSetup();
 
