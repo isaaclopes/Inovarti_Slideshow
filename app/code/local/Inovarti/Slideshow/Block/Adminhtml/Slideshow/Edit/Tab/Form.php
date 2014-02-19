@@ -45,7 +45,7 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
             'required' => true,
             'name' => 'slide_link',
         ));
-        
+
         $fieldset->addField('position', 'select', array(
             'name'    => 'position',
             'options' => array(
@@ -105,11 +105,56 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
                 ),
             ),
         ));
+
+
+        $fieldset->addField('backgroundimage', 'image', array(
+            'label'     => Mage::helper('slideshow')->__('Background Image'),
+            'required'  => false,
+            'name'      => 'backgroundimage',
+        ));
+
+        $fieldset->addField('backgroundrepeat', 'select', array(
+            'label'     => Mage::helper('slideshow')->__('Repeat X/Y'),
+            'name'      => 'backgroundrepeat',
+            'values'    => array(
+
+                array(
+                    'value'     => 'no-repeat',
+                    'label'     => Mage::helper('slideshow')->__('Nenhum'),
+                ),
+
+                array(
+                    'value'     => 'repeat-x',
+                    'label'     => Mage::helper('slideshow')->__('Repeat X'),
+                ),
+
+                array(
+                    'value'     => 'repeat-y',
+                    'label'     => Mage::helper('slideshow')->__('Repeat Y'),
+                ),
+            ),
+            'value' => 1,
+        ));
+
+        $fieldset->addField('backgroundsize', 'text', array(
+            'label' => Mage::helper('slideshow')->__('Background Size'),
+            'required' => false,
+            'name' => 'backgroundsize',
+        ));
+
+        $fieldset->addField('backgroundposition', 'text', array(
+            'label' => Mage::helper('slideshow')->__('Background Position'),
+            'required' => false,
+            'name' => 'backgroundposition',
+        ));
+
         $fieldset->addField('color', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Color'),
+            'label' => Mage::helper('slideshow')->__('Background Color'),
             'required' => false,
             'name' => 'color',
         ));
+
+
         $fieldset->addField('sort_order', 'text', array(
             'label' => Mage::helper('slideshow')->__('Sort Order'),
             'required' => false,

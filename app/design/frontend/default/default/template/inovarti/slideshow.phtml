@@ -12,7 +12,7 @@ if ($config['enabled']) {
     if ($show) {
         $slides = $this->getSlides();
         ?>
-        <div id="HomeCarousel" class="carousel slide">  
+        <div id="HomeCarousel" class="carousel slide">
             <div class="container">
                 <div class="row">
                     <?php if ($config['control_nav']) : ?>
@@ -27,12 +27,23 @@ if ($config['enabled']) {
                         </ol>
                     <?php endif;
                     ?>
-                    <div class="carousel-inner">  
+                    <div class="carousel-inner">
                         <?php
                         foreach ($slides as $k => $s) {
                             ?>
                             <?php if (!empty($s['image'])) : ?>
-                                <div class="item <?php if ($k == 1) echo 'active'; ?>">
+                                <div class="item <?php if ($k == 1) echo 'active'; ?>"
+                                     <?php
+                                            echo (empty($s['backgroundimage']) ? '' :
+                                                        'style="
+                                                                background-image: "'.$s['backgroundimage'].'";
+                                                                background-color:  "'.$s['color'].'";
+                                                                background-size: "'.$s['backgroundsize'].'";
+                                                                background-position: "'.$s['backgroundposition'].'";
+                                                                background-repeat:  "'.$s['backgroundrepeat'].'";"'
+                                                    ;
+                                     ?>
+                                    >
                                     <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>">
                                         <img src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>"/>
                                     </a>
@@ -41,15 +52,15 @@ if ($config['enabled']) {
                             <?php
                         }
                         ?>
-                    </div>  
-                    <!-- Carousel nav -->  
+                    </div>
+                    <!-- Carousel nav -->
                     <?php if ($config['direction_nav']): ?>
-                        <a class="carousel-control left" href="#HomeCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>  
-                        <a class="carousel-control right" href="#HomeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>  
+                        <a class="carousel-control left" href="#HomeCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="carousel-control right" href="#HomeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
                         <?php endif; ?>
-                </div> 
+                </div>
             </div>
-        </div>  
+        </div>
         <script>
             jQuery('#HomeCarousel').carousel({
                 interval: <?php echo $config['interval']; ?>, wrap: <?php echo ( in_array($config['wrap'], array('true', 'false')) ? $config['wrap'] : 'false' ); ?>

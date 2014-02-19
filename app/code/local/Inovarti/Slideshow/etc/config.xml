@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Inovarti_Slideshow>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </Inovarti_Slideshow>
     </modules>
     <admin>
