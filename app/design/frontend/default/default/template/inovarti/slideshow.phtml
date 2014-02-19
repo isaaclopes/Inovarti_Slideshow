@@ -12,9 +12,9 @@ if ($config['enabled']) {
     if ($show) {
         $slides = $this->getSlides();
         ?>
-        <div class="row">
-            <div class='col-md-12'>
-                <div id="HomeCarousel" class="carousel slide">  
+        <div id="HomeCarousel" class="carousel slide">  
+            <div class="container">
+                <div class="row">
                     <?php if ($config['control_nav']) : ?>
                         <ol class="carousel-indicators">
                             <?php
@@ -46,18 +46,16 @@ if ($config['enabled']) {
                     <?php if ($config['direction_nav']): ?>
                         <a class="carousel-control left" href="#HomeCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>  
                         <a class="carousel-control right" href="#HomeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>  
-                    <?php endif; ?>
-                </div>  
-                <script>
-                    jQuery('#HomeCarousel').carousel({
-                        interval: <?php echo $config['interval']; ?>,
-                        wrap: <?php echo ( in_array($config['wrap'], array('true', 'false')) ? $config['wrap'] : 'false' ); ?>
-                    });
-                    jQuery('.carousel-inner > div.item').eq(0).addClass('active');
-                </script>
+                        <?php endif; ?>
+                </div> 
             </div>
-        </div>
-
+        </div>  
+        <script>
+            jQuery('#HomeCarousel').carousel({
+                interval: <?php echo $config['interval']; ?>, wrap: <?php echo ( in_array($config['wrap'], array('true', 'false')) ? $config['wrap'] : 'false' ); ?>
+            });
+            jQuery('.carousel-inner > div.item').eq(0).addClass('active');
+        </script>
         <?php
     }
 }

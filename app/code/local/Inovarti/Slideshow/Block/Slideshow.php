@@ -60,7 +60,8 @@ class Inovarti_Slideshow_Block_Slideshow extends Mage_Core_Block_Template {
                 ->addFieldToSelect('*')
                 ->addFieldToFilter('position', 1)
                 ->addFieldToFilter('status', 1)
-                ->setOrder('sort_order', 'asc');
+                ->setOrder('sort_order', 'asc')
+                ->setPageSize(4);
 
         $slides
                 ->addFieldToFilter('from_date', array('or' => array(

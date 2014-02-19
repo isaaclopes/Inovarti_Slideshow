@@ -54,7 +54,6 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
             ),
             'label'   => Mage::helper('slideshow')->__('Position'),
         ));
-        
         $fieldset->addField('from_date', 'date', array(
             'label' => Mage::helper('slideshow')->__('Date Start'),
             'name' => 'from_date',
@@ -106,7 +105,11 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
                 ),
             ),
         ));
-
+        $fieldset->addField('color', 'text', array(
+            'label' => Mage::helper('slideshow')->__('Color'),
+            'required' => false,
+            'name' => 'color',
+        ));
         $fieldset->addField('sort_order', 'text', array(
             'label' => Mage::helper('slideshow')->__('Sort Order'),
             'required' => false,
