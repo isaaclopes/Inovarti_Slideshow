@@ -13,8 +13,7 @@ if ($config['enabled']) {
         $slides = $this->getSlides();
         ?>
         <div id="HomeCarousel" class="carousel slide">
-            <div class="container">
-                <div class="row">
+
                     <?php if ($config['control_nav']) : ?>
                         <ol class="carousel-indicators">
                             <?php
@@ -32,21 +31,12 @@ if ($config['enabled']) {
                         foreach ($slides as $k => $s) {
                             ?>
                             <?php if (!empty($s['image'])) : ?>
-                                <div class="item <?php if ($k == 1) echo 'active'; ?>"
-                                     <?php
-                                            echo (empty($s['backgroundimage']) ? '' :
-                                                        'style="
-                                                                background-image: "'.$s['backgroundimage'].'";
-                                                                background-color:  "'.$s['color'].'";
-                                                                background-size: "'.$s['backgroundsize'].'";
-                                                                background-position: "'.$s['backgroundposition'].'";
-                                                                background-repeat:  "'.$s['backgroundrepeat'].'";"'
-                                                    ;
-                                     ?>
-                                    >
-                                    <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>">
-                                        <img src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>"/>
-                                    </a>
+                                <div class="item <?php if ($k == 1) echo 'active'; ?>" style="<?php echo ( empty($s['backgroundposition']) ? '' : '' . "background-position:".$s['backgroundposition'] ."; ". '' ).( empty($s['backgroundsize']) ? '' : '' . "background-size:".$s['backgroundsize'] ."; ". '' ).( empty($s['backgroundrepeat']) ? '' : '' . "background-repeat:".$s['backgroundrepeat'] ."; ". '' ).( empty($s['color']) ? '' : '' . "background-color:".$s['color'] ."; ". '' ).( empty($s['backgroundimage']) ? '' : '' . "background-image:url(media/".$s['backgroundimage'] ."); ". '' )?>">
+                                    <div class="container">
+                                        <a href="<?php echo ( empty($s['slide_link']) ? '' : '' . $s['slide_link'] . '' ); ?>" <?php echo ( empty($s['slide_link']) ? '' : 'onclick="window.location=\'' . $s['slide_link'] . '\'"' ); ?> title="<?php echo $s['slide_title']; ?>">
+                                            <img src="<?php echo Mage::getBaseUrl('media') . $s['image'] ?>" alt="<?php echo $s['slide_title']; ?>" height="400"/>
+                                        </a>
+                                    </div>
                                 </div>
                             <?php endif; ?>
                             <?php
@@ -59,7 +49,6 @@ if ($config['enabled']) {
                         <a class="carousel-control right" href="#HomeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
                         <?php endif; ?>
                 </div>
-            </div>
         </div>
         <script>
             jQuery('#HomeCarousel').carousel({
