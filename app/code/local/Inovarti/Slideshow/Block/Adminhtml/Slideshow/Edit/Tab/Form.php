@@ -16,6 +16,21 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
         $this->setForm($form);
         $fieldset = $form->addFieldset('slideshow_form', array('legend' => Mage::helper('slideshow')->__('Slide information')));
 
+        $fieldset->addField('status', 'select', array(
+            'label' => Mage::helper('slideshow')->__('Status'),
+            'name' => 'status',
+            'values' => array(
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('slideshow')->__('Enabled'),
+                ),
+                array(
+                    'value' => 2,
+                    'label' => Mage::helper('slideshow')->__('Disabled'),
+                ),
+            ),
+        ));
+
         if (!Mage::app()->isSingleStoreMode()) {
             $fieldset->addField('store_id', 'multiselect', array(
                 'name' => 'stores[]',
@@ -71,6 +86,7 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
 
         $data = array();
         $out = '';
+        $Backout = '';
         if (Mage::getSingleton('adminhtml/session')->getSlideshowData()) {
             $data = Mage::getSingleton('adminhtml/session')->getSlideshowData();
         } elseif (Mage::registry('slideshow_data')) {
@@ -90,29 +106,7 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
             'name' => 'image',
             'note' => 'Images Slider' . $out,
         ));
-
-        $fieldset->addField('status', 'select', array(
-            'label' => Mage::helper('slideshow')->__('Status'),
-            'name' => 'status',
-            'values' => array(
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('slideshow')->__('Enabled'),
-                ),
-                array(
-                    'value' => 2,
-                    'label' => Mage::helper('slideshow')->__('Disabled'),
-                ),
-            ),
-        ));
-
-
-        $fieldset->addField('backgroundimage', 'image', array(
-            'label'     => Mage::helper('slideshow')->__('Background Image'),
-            'required'  => false,
-            'name'      => 'backgroundimage',
-        ));
-
+        
         $fieldset->addField('backgroundrepeat', 'select', array(
             'label'     => Mage::helper('slideshow')->__('Repeat X/Y'),
             'name'      => 'backgroundrepeat',
@@ -147,7 +141,19 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
             'required' => false,
             'name' => 'backgroundposition',
         ));
-
+        if (!empty($data['backgroundimage'])) {
+            $url = Mage::getBaseUrl('media') . $data['backgroundimage'];
+            $Backout = '<br/><center><a href="' . $url . '" target="_blank" id="imageurl">';
+            $Backout .= "<img src=" . $url . " width='150px' />";
+            $Backout .= '</a></center>';
+        }
+        
+        $fieldset->addField('backgroundimage', 'file', array(
+            'label' => Mage::helper('slideshow')->__('Background Image'),
+            'required' => false,
+            'name' => 'backgroundimage',
+            'note' => 'Images Background' . $Backout,
+        ));
         $fieldset->addField('color', 'text', array(
             'label' => Mage::helper('slideshow')->__('Background Color'),
             'required' => false,

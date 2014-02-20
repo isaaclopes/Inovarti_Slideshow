@@ -89,6 +89,36 @@ class Inovarti_Slideshow_Adminhtml_SlideshowController extends Mage_Adminhtml_Co
 
                 $data['image'] = 'slideshow/' . $result['file'];
             }
+            //imagem2
+            if (isset($_FILES['backgroundimage']['name']) && $_FILES['backgroundimage']['name'] != null) {
+                $result['file'] = '';
+                try {
+                    /* Starting upload */
+                    $uploader = new Varien_File_Uploader('backgroundimage');
+
+                    // Any extention would work
+                    $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
+                    $uploader->setAllowRenameFiles(true);
+
+                    // Set the file upload mode 
+                    // false -> get the file directly in the specified folder
+                    // true -> get the file in the product like folders 
+                    //	(file.jpg will go in something like /media/f/i/file.jpg)
+                    $uploader->setFilesDispersion(false);
+
+                    // We set media as the upload dir
+                    $path = Mage::getBaseDir('media') . DS . 'slideshow' . DS;
+                    $result = $uploader->save($path, $_FILES['backgroundimage']['name']);
+                } catch (Exception $e) {
+                    Mage::getSingleton('adminhtml/session')->addError($e->getMessage() . '  ' . $path);
+                    Mage::getSingleton('adminhtml/session')->setFormData($data);
+                    $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                    return;
+                }
+
+                $data['backgroundimage'] = 'slideshow/' . $result['file'];
+            }
+            
             if ($data['from_date'] != NULL) {
                 $date = DateTime::createFromFormat('d/m/Y', $data['from_date']);
                 $data['from_date'] = $date->format('Y-m-d');

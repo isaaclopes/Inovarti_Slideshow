@@ -43,17 +43,5 @@ $installer->getConnection()
             'nullable' => true,
             'default' => null)
 );
-
-/*   Já tem o color
-$installer->getConnection()
-        ->addColumn($slidesTable, 'backgroundcolor', array(
-            'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-            'comment' => 'Background Color',
-            'nullable' => true,
-            'default' => null)
-);
-*/
-
-
 $installer->endSetup();
 
