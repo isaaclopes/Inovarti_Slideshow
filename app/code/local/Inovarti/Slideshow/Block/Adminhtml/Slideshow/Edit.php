@@ -1,14 +1,15 @@
 <?php
-
 /**
  *
  * @category   Inovarti
  * @package    Inovarti_Slideshow
  * @author     Suporte <suporte@inovarti.com.br>
  */
-class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 
-    public function __construct() {
+class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+{
+    public function __construct()
+    {
         parent::__construct();
 
         $this->_objectId = 'id';
@@ -26,17 +27,17 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit extends Mage_Adminhtml_B
 
         $this->_formScripts[] = "
             function saveAndContinueEdit(){
-                editForm.submit($('edit_form').action+'back/edit/');
+                editForm.submit($('edit_form').action + 'back/edit/');
             }
         ";
     }
 
-    public function getHeaderText() {
-        if (Mage::registry('slideshow_data') && Mage::registry('slideshow_data')->getId()) {
-            return Mage::helper('slideshow')->__("Edit Slide");
+    public function getHeaderText()
+    {
+        if (Mage::registry('current_model')->getId() > 0) {
+            return Mage::helper('slideshow')->__("Edit Slideshow '%s'", $this->htmlEscape(Mage::registry('current_model')->getTitle()));
         } else {
-            return Mage::helper('slideshow')->__('Add Slide');
+            return Mage::helper('slideshow')->__('Add Slideshow');
         }
     }
-
 }

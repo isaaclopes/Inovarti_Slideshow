@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Slideshow
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+-->
+<layout version="0.1.0">
+    <cms_index_index translate="label">
+        <reference name="head">
+            <action method="addCss"><stylesheet>js/lib/owl/css/owl.carousel.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/lib/owl/js/owl.carousel.min.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="slideshow/slideshow" name="slideshow" as="slideshow" before="-" template="inovarti/slideshow.phtml"/>
+        </reference>
+    </cms_index_index>
+    <catalog_product_view translate="label">
+        <reference name="root">
+            <block type="slideshow/slideshow" name="banner_fix" as="banner_fix" template="inovarti/banner_fix.phtml"/>
+        </reference>
+    </catalog_product_view>
+    <catalog_category_view translate="label">
+        <reference name="root">
+            <block type="slideshow/slideshow" name="banner_fix" as="banner_fix" template="inovarti/banner_fix.phtml"/>
+        </reference>
+    </catalog_category_view>
+    <landingpage_index_view translate="label">
+        <reference name="root">
+            <block type="slideshow/slideshow" name="banner_fix" as="banner_fix" template="inovarti/banner_fix.phtml"/>
+        </reference>
+    </landingpage_index_view>
+    <catalogsearch_result_index translate="label">
+        <reference name="root">
+            <block type="slideshow/slideshow" name="banner_fix" as="banner_fix" template="inovarti/banner_fix.phtml"/>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

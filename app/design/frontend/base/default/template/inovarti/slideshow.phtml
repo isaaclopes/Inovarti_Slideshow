@@ -1,0 +1,122 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Slideshow
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+$config = Mage::getStoreConfig('slideshow/config');
+if ($config['enabled']) {
+    $model = Mage::getModel('slideshow/slideshow');
+    $banner = $model->getSlides(array('position' => 1));
+
+    if ($banner->getSize() >0):
+    ?>
+        <div class="container">
+            <div class="row">
+
+                <div id="HomeCarousel" class="owl-carousel">
+                    <?php foreach ($banner as $k => $slide) { ?>
+                        <?php if ($slide->getImage()) : ?>
+                            <div class="item <?php if ($k == 1) echo 'active'; ?>">
+                                <a href="<?php echo $slide->getLink() ? $slide->getLink() : ""; ?>" <?php echo $slide->getLink() ? "onclick='window.location=" . $slide->getLink() . "'" : ""; ?> title="<?php echo $slide->getTitle(); ?>">
+                                    <img src="<?php echo Mage::getBaseUrl('media') . 'slideshow/' . $slide->getImage() ?>" alt="<?php echo $slide->getTitle(); ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : 'auto' ); ?>"/>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    <?php } ?>
+                </div>
+                <!-- Carousel nav -->
+
+            </div>
+        </div>
+        <script>
+            <?php if ($config['control_nav']) : ?><?php endif;?>
+            <?php if ($config['direction_nav']): ?><?php endif; ?>
+            if (jQuery('#HomeCarousel').length) {
+                jQuery('#HomeCarousel').owlCarousel({
+                    navigation : false, // Show next and prev buttons
+                    slideSpeed : 300,
+                    paginationSpeed : 400,
+                    singleItem:true,
+                    lazyLoad : true,
+                    autoHeight: true,
+                    // "singleItem:true" is a shortcut for:
+                    // items : 1,
+                    // itemsDesktop : false,
+                    // itemsDesktopSmall : false,
+                    // itemsTablet: false,
+                    // itemsMobile : false
+                });
+            }
+        </script>
+    <?php endif; ?>
+
+    <div class="col-md-12">
+        <h3>Mini banner</h3>
+        <?php
+        $minibanner = $model->getSlides(array('limit' => '3', 'position' => 2));
+        foreach ($minibanner as $slide) {
+            ?>
+            <?php if ($slide->getImage()) : ?>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="<?php echo Mage::getBaseUrl('media') . 'slideshow/' . $slide->getImage() ?>" alt="<?php echo $slide->getTitle(); ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : '176' ); ?>">
+                        <div class="caption">
+                            <h4><a href="<?php echo $slide->getLink() ? $slide->getLink() : ""; ?>" <?php echo $slide->getLink() ? "onclick='window.location=" . $slide->getLink() . "'" : ""; ?> title="<?php echo $slide->getTitle(); ?>"><?php echo $slide->getTitle(); ?></a></h4>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php } ?>
+    </div>
+    <?php
+    $carousel = $model->getSlides(array('position' => 3));
+    if ($banner->getSize() >0):
+    ?>
+    <div class="col-md-12">
+        <h3>Carrossel</h3>
+        <div class="container">
+            <div class="row">
+                <div id="miniCarousel" class="owl-carousel col-md-12">
+                <?php
+                foreach ($carousel as $slide) {
+                    ?>
+                    <?php if ($slide->getImage()) : ?>
+                        <div class="item ">
+                            <div class="thumbnail">
+                                <img src="<?php echo Mage::getBaseUrl('media') . 'slideshow/' . $slide->getImage() ?>" alt="<?php echo $slide->getTitle(); ?>" height="<?php echo (is_numeric($config['height']) ? $config['height'] : '67' ); ?>">
+                                <div class="caption">
+                                    <h4><a href="<?php echo $slide->getLink() ? $slide->getLink() : ""; ?>" <?php echo $slide->getLink() ? "onclick='window.location=" . $slide->getLink() . "'" : ""; ?> title="<?php echo $slide->getTitle(); ?>"><?php echo $slide->getTitle(); ?></a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            if (jQuery('#miniCarousel').length) {
+                jQuery('#miniCarousel').owlCarousel({
+                    navigation : true,
+                    navigationText : ["", ""],
+                    slideSpeed : 300,
+                    pagination : false,
+                    paginationSpeed : 400,
+                    lazyLoad : true,
+                    autoHeight: true,
+                    items : 6,
+                    // "singleItem:true" is a shortcut for:
+                    // items : 1,
+                    // itemsDesktop : false,
+                    // itemsDesktopSmall : false,
+                    // itemsTablet: false,
+                    // itemsMobile : false
+                });
+            }
+        </script>
+    <?php endif; ?>
+<?php
+}?>

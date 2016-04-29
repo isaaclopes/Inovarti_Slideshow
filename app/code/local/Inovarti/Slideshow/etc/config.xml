@@ -10,46 +10,24 @@
 <config>
     <modules>
         <Inovarti_Slideshow>
-            <version>0.1.3</version>
+            <version>0.1.2</version>
         </Inovarti_Slideshow>
     </modules>
-    <admin>
-        <routers>
-            <slideshow>
-                <use>admin</use>
-                <args>
-                    <module>Inovarti_Slideshow</module>
-                    <frontName>slideshow</frontName>
-                </args>
-            </slideshow>
-        </routers>
-    </admin>
-    <frontend>
-        <layout>
-            <updates>
-                <slideshow>
-                    <file>inovarti/slideshow.xml</file>
-                </slideshow>
-            </updates>
-        </layout>
-    </frontend>
     <global>
         <models>
             <slideshow>
                 <class>Inovarti_Slideshow_Model</class>
-                <resourceModel>slideshow_mysql4</resourceModel>
+                <resourceModel>slideshow_resource</resourceModel>
             </slideshow>
-            <slideshow_mysql4>
-                <class>Inovarti_Slideshow_Model_Mysql4</class>
+            
+            <slideshow_resource>
+                <class>Inovarti_Slideshow_Model_Resource</class>
                 <entities>
-                    <slides>
-                        <table>slideshow_slides</table>
-                    </slides>
-                    <slides_store>
-                        <table>slideshow_slides_store</table>
-                    </slides_store>
+                    <slideshow>
+                        <table>slideshow_slideshow</table>
+                    </slideshow>
                 </entities>
-            </slideshow_mysql4>
+            </slideshow_resource>
         </models>
         <resources>
             <slideshow_setup>
@@ -71,60 +49,34 @@
                 </connection>
             </slideshow_read>
         </resources>
-        <blocks>
-            <slideshow>
-                <class>Inovarti_Slideshow_Block</class>
-            </slideshow>
-        </blocks>
         <helpers>
             <slideshow>
                 <class>Inovarti_Slideshow_Helper</class>
             </slideshow>
         </helpers>
+        <blocks>
+            <slideshow>
+                <class>Inovarti_Slideshow_Block</class>
+            </slideshow>
+        </blocks>
     </global>
-    <adminhtml>
-        <menu>
-            <catalog translate="title" module="catalog">
-                <children>
-                    <slideshow translate="title" module="slideshow">
-                        <title>Slideshow</title>
-                        <sort_order>50</sort_order>
-                        <children>
-                            <items translate="title" module="slideshow">
-                                <title>Manage Slides</title>
-                                <sort_order>0</sort_order>
-                                <action>slideshow/adminhtml_slideshow</action>
-                            </items>
-                            <configuration translate="title">
-                                <title>Configuration</title>
-                                <sort_order>1</sort_order>
-                                <action>adminhtml/system_config/edit/section/slideshow</action>
-                            </configuration>
-                        </children>
-                    </slideshow>
-                </children>
-            </catalog>
-        </menu>
-        <acl>
-            <resources>
-                <admin>
-                    <children>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <slideshow translate="title" module="slideshow">
-                                            <title>Slideshow</title>
-                                            <sort_order>300</sort_order>
-                                        </slideshow>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
+    <frontend>
+        <routers>
+            <slideshow>
+                <use>standard</use>
+                <args>
+                    <module>Inovarti_Slideshow</module>
+                    <frontName>slideshow</frontName>
+                </args>
+            </slideshow>
+        </routers>
+        <layout>
+            <updates>
+                <slideshow>
+                    <file>inovarti/slideshow.xml</file>
+                </slideshow>
+            </updates>
+        </layout>
         <translate>
             <modules>
                 <Inovarti_Slideshow>
@@ -134,6 +86,35 @@
                 </Inovarti_Slideshow>
             </modules>
         </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+				<args>
+					<modules>
+						<slideshow before="Mage_Adminhtml">Inovarti_Slideshow_Adminhtml</slideshow>
+					</modules>
+				</args>
+			</adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <slideshow>
+                    <files>
+                        <default>Inovarti_Slideshow.csv</default>
+                    </files>
+                </slideshow>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <slideshow>
+                    <file>inovarti_slideshow.xml</file>
+                </slideshow>
+            </updates>
+        </layout>
     </adminhtml>
     <default>
         <slideshow>

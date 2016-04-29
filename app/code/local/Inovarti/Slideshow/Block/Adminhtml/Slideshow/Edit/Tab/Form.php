@@ -10,93 +10,110 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
 
     protected function _prepareForm() {
 
-        $model = Mage::registry('slideshow_slideshow');
-
+	$model = Mage::registry('current_model');
+        
+        
         $form = new Varien_Data_Form();
         $this->setForm($form);
-        $fieldset = $form->addFieldset('slideshow_form', array('legend' => Mage::helper('slideshow')->__('Slide information')));
-
-        $fieldset->addField('status', 'select', array(
-            'label' => Mage::helper('slideshow')->__('Status'),
-            'name' => 'status',
-            'values' => array(
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('slideshow')->__('Enabled'),
-                ),
-                array(
-                    'value' => 2,
-                    'label' => Mage::helper('slideshow')->__('Disabled'),
-                ),
-            ),
+        $fieldset = $form->addFieldset('slideshow_form', array('legend' => Mage::helper('slideshow')->__('General Information')));
+        if ($model->getId()) {
+            $fieldset->addField('slideshow_id', 'hidden', array(
+                'name'      => 'slideshow_id',
+                'value'     => $model->getId(),
+            ));
+        }
+        
+        $fieldset->addField('is_active', 'select', array(
+            'label'    => Mage::helper('slideshow')->__('Is Active'),
+            'required' => true,
+            'name'     => 'is_active',
+            'value'    => $model->getIsActive(),
+            'values'   => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray(),
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
-            $fieldset->addField('store_id', 'multiselect', array(
-                'name' => 'stores[]',
-                'label' => Mage::helper('slideshow')->__('Store View'),
-                'title' => Mage::helper('slideshow')->__('Store View'),
+            $fieldset->addField('store_id', 'select', array(
+                'label'    => Mage::helper('slideshow')->__('Store View'),
                 'required' => true,
-                'values' => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, true),
+                'name'     => 'store_id',
+                'value'    => $model->getStoreId(),
+                'values'   => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(),
             ));
-        }/*
-          else {
-          $fieldset->addField('store_id', 'hidden', array(
-          'name'      => 'stores[]',
-          'value'     => 0
-          ));
-          } */
+        } else {
+            $fieldset->addField('store_id', 'hidden', array(
+                'name'  => 'store_id',
+                'value' => Mage::app()->getStore(true)->getId()
+            ));
+        }
 
-        $fieldset->addField('slide_title', 'text', array(
+        $fieldset->addField('title', 'text', array(
             'label' => Mage::helper('slideshow')->__('Title'),
             'class' => 'required-entry',
             'required' => true,
-            'name' => 'slide_title',
+            'name'     => 'title',
+            'value'    => $model->getTitle()
         ));
 
-        $fieldset->addField('slide_link', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Link'),
-            'class' => 'validate-url',
+        $fieldset->addField('description', 'text', array(
+            'label' => Mage::helper('slideshow')->__('Description'),
+            'class' => 'required-entry',
             'required' => true,
-            'name' => 'slide_link',
+            'name'     => 'description',
+            'value'    => $model->getDescription()
+        ));
+
+        $fieldset->addField('link', 'text', array(
+            'class' => 'validate-url',
+            'label'    => Mage::helper('slideshow')->__('Link'),
+            'required' => true,
+            'name' => 'link',
+            'value'    => $model->getLink(),
+            'note'     => Mage::helper('slideshow')->__('e.g. http://')
         ));
 
         $fieldset->addField('position', 'select', array(
             'name'    => 'position',
-            'options' => array(
-                Mage::helper('slideshow')->__('Header'),
-                Mage::helper('slideshow')->__('Mini Header')
-            ),
-            'label'   => Mage::helper('slideshow')->__('Position'),
+            'label'    => Mage::helper('slideshow')->__('Position'),
+            'required' => true,
+            'value'    => $model->getPosition(),
+            'values'   => Mage::getSingleton('slideshow/system_config_source_position')->toOptionArray(),
         ));
+        $fieldset->addField('miniatura_mosaic', 'checkbox', array(
+            'name'    => 'miniatura_mosaic',
+            'label'    => Mage::helper('slideshow')->__('Miniatura Mosaico'),
+            'after_element_html' => '<small>Sim</small>',
+            'onclick' => 'this.value = this.checked ? 1 : 0;',
+            'value'   => $model->getMiniaturaMosaic(),
+        ))->setIsChecked($model->getMiniaturaMosaic());
+        
         $fieldset->addField('from_date', 'date', array(
             'label' => Mage::helper('slideshow')->__('Date Start'),
             'name' => 'from_date',
             'image' => $this->getSkinUrl('images/grid-cal.gif'),
             'format' => Mage::app()->getLocale()->getDateFormatWithLongYear(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
-            'input_format' => Varien_Date::DATE_INTERNAL_FORMAT
+            'input_format' => Varien_Date::DATE_INTERNAL_FORMAT,
+            'value'    => $model->getFromDate(),
         ));
         $fieldset->addField('to_date', 'date', array(
             'label' => Mage::helper('slideshow')->__('Date Expire'),
             'name' => 'to_date',
             'image' => $this->getSkinUrl('images/grid-cal.gif'),
             'format' => Mage::app()->getLocale()->getDateFormatWithLongYear(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
-            'input_format' => Varien_Date::DATE_INTERNAL_FORMAT
+            'input_format' => Varien_Date::DATE_INTERNAL_FORMAT,
+            'value'    => $model->getToDate(),
         ));
+        if($model->getId() && $model->getUrl()) {            
+            $fieldset->addField('access_url', 'note', array(
+                'label'    => Mage::helper('slideshow')->__('Slideshow Access Url'),
+                'title'    => Mage::helper('slideshow')->__('Slideshow Access Url'),
+                'text'    => '<a href="'.$model->getUrl().'" target="_blank">'.$model->getUrl().'</a>',
+            ));
 
-        $data = array();
-        $out = '';
-        $Backout = '';
-        if (Mage::getSingleton('adminhtml/session')->getSlideshowData()) {
-            $data = Mage::getSingleton('adminhtml/session')->getSlideshowData();
-        } elseif (Mage::registry('slideshow_data')) {
-            $data = Mage::registry('slideshow_data')->getData();
         }
-
-        if (!empty($data['image'])) {
-            $url = Mage::getBaseUrl('media') . $data['image'];
-            $out = '<br/><center><a href="' . $url . '" target="_blank" id="imageurl">';
-            $out .= "<img src=" . $url . " width='150px' />";
+        $out = '';
+         if($model->getId() && $model->getImage()) {     
+            $out = '<br/><center><a href="' . $model->getUrl() . '" target="_blank" id="imageurl">';
+            $out .= "<img src=" . $model->getUrl() . " width='150px' />";
             $out .= '</a></center>';
         }
 
@@ -107,72 +124,12 @@ class Inovarti_Slideshow_Block_Adminhtml_Slideshow_Edit_Tab_Form extends Mage_Ad
             'note' => 'Images Slider' . $out,
         ));
         
-        $fieldset->addField('backgroundrepeat', 'select', array(
-            'label'     => Mage::helper('slideshow')->__('Repeat X/Y'),
-            'name'      => 'backgroundrepeat',
-            'values'    => array(
-
-                array(
-                    'value'     => 'no-repeat',
-                    'label'     => Mage::helper('slideshow')->__('Nenhum'),
-                ),
-
-                array(
-                    'value'     => 'repeat-x',
-                    'label'     => Mage::helper('slideshow')->__('Repeat X'),
-                ),
-
-                array(
-                    'value'     => 'repeat-y',
-                    'label'     => Mage::helper('slideshow')->__('Repeat Y'),
-                ),
-            ),
-            'value' => 1,
-        ));
-
-        $fieldset->addField('backgroundsize', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Background Size'),
-            'required' => false,
-            'name' => 'backgroundsize',
-        ));
-
-        $fieldset->addField('backgroundposition', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Background Position'),
-            'required' => false,
-            'name' => 'backgroundposition',
-        ));
-        if (!empty($data['backgroundimage'])) {
-            $url = Mage::getBaseUrl('media') . $data['backgroundimage'];
-            $Backout = '<br/><center><a href="' . $url . '" target="_blank" id="imageurl">';
-            $Backout .= "<img src=" . $url . " width='150px' />";
-            $Backout .= '</a></center>';
-        }
-        
-        $fieldset->addField('backgroundimage', 'file', array(
-            'label' => Mage::helper('slideshow')->__('Background Image'),
-            'required' => false,
-            'name' => 'backgroundimage',
-            'note' => 'Images Background' . $Backout,
-        ));
-        $fieldset->addField('color', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Background Color'),
-            'required' => false,
-            'name' => 'color',
-        ));
-
-
         $fieldset->addField('sort_order', 'text', array(
-            'label' => Mage::helper('slideshow')->__('Sort Order'),
+            'label' => Mage::helper('slideshow')->__('Ordem'),
             'required' => false,
             'name' => 'sort_order',
+            'value'    => $model->getSortOrder(),
         ));
-
-        if (Mage::getSingleton('adminhtml/session')->getSlideshowData()) {
-            $form->setValues(Mage::getSingleton('adminhtml/session')->getSlideshowData());
-            Mage::getSingleton('adminhtml/session')->getSlideshowData(null);
-        } elseif (Mage::registry('slideshow_data')) {
-            $form->setValues(Mage::registry('slideshow_data')->getData());
-        }
         return parent::_prepareForm();
     }
 
